@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ENV_NAME=custom
+
+source /etc/bash.bashrc
+source ~/.bashrc
+
+PS1="($ENV_NAME)"$PS1
+
+alias g=grep
