@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# actual IPs omitted, put your own in
+
+# i tend to use this to connect as either myself or root to servers
+# i need to work on
+
+machine=`printf "m1\nm2\n" | fzf`
+case $machine in
+    m1)
+        address="x.x.x.x"
+        user="usr"
+        ;;
+    m2)
+        address="y.y.y.y"
+        user=`printf "usr1\nusr2\nusr3\n" | fzf`
+        ;;
+    "")
+        echo "connection cancelled"
+        exit
+        ;;
+    *)
+        echo "unknown option <$machine> check case statement"
+        ;;
+esac
+
+printf "Forward SSH Agent? [y/N] "
+read fw
+
+case $fw in
+    yes | y | Yes | Y)
+        cmd="ssh -A $user@$address"
+        ;;
+    no | No | n | N | "") # no is default, catch this here
+        cmd="ssh $user@$address"
+        ;;
+    *)
+        echo "unknown option <$fw>\nExiting..."
+        ;;
+esac
+
+echo "connecting with: '$cmd'"
+eval $cmd
+echo "bye!"
