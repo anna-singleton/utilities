@@ -5,7 +5,7 @@
 # i tend to use this to connect as either myself or root to servers
 # i need to work on
 
-machine=`printf "m1\nm2\n" | fzf`
+machine=$( printf "m1\nm2\n" | fzf )
 case $machine in
     m1)
         address="x.x.x.x"
@@ -13,7 +13,7 @@ case $machine in
         ;;
     m2)
         address="y.y.y.y"
-        user=`printf "usr1\nusr2\nusr3\n" | fzf`
+        user=$(printf "usr1\nusr2\nusr3\n" | fzf)
         ;;
     "")
         echo "connection cancelled"
@@ -25,7 +25,7 @@ case $machine in
 esac
 
 printf "Forward SSH Agent? [y/N] "
-read fw
+read -r fw
 
 case $fw in
     yes | y | Yes | Y)
@@ -35,10 +35,10 @@ case $fw in
         cmd="ssh $user@$address"
         ;;
     *)
-        echo "unknown option <$fw>\nExiting..."
+        printf "unknown option <%s>\nExiting...\n" "$fw"
         ;;
 esac
 
 echo "connecting with: '$cmd'"
-eval $cmd
+eval "$cmd"
 echo "bye!"

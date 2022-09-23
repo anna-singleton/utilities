@@ -5,9 +5,9 @@
 
 mk-file() {
     echo "enter command to save to quickrun file..."
-    read cmd
+    read -r cmd
     echo "saving '$cmd' to .quickrun"
-    echo $cmd > .quickrun
+    echo "$cmd" > .quickrun
 }
 
 unset create_file
@@ -25,12 +25,12 @@ if [[ -n $create_file ]]; then
     mk-file;
 fi
 
-cmd=`cat .quickrun`
+cmd=$(cat .quickrun)
 
 # quickrun is either custom on one line, cmd on next, or a default runner,
 # defined in /etc/quickrun or ~/.config/quickrun
 
-eval $cmd
+eval "$cmd"
 printf "<ENTER> to close..."
 read
 #mk-file

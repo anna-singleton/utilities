@@ -3,7 +3,7 @@
 ENV_NAME=custom
 
 source /etc/bash.bashrc
-source ~/.bashrc
+source "$HOME/.bashrc"
 
 PS1="($ENV_NAME)"$PS1
 
